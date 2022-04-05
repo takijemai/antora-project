@@ -16,7 +16,6 @@ jobs:
       - name: Install git and rsync
         run: |
           apk update && apk add git rsync
-          apt-get update && apt-get install -y rsync git
 
       - uses: actions/checkout@v2
 
@@ -28,12 +27,6 @@ jobs:
           cp -R node_modules/@antora/lunr-extension/supplemental_ui/* supplemental-ui/ 
           npx antora local-antora-playbook.yml --fetch
 
-      # Uploads the generated site
-      - uses: actions/upload-artifact@v3
-        with:
-          name: cicd-232cf038086dc798e51d5201bba9945277562851
-          path: docs/
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         if: contains(github.ref,'refs/heads/main')
@@ -41,3 +34,9 @@ jobs:
           branch: gh-pages
           folder: cicd-232cf038086dc798e51d5201bba9945277562851
           clean: true
+
+      # Uploads the generated site
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cicd-232cf038086dc798e51d5201bba9945277562851
+          path: docs/
