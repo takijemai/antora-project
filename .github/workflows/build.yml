@@ -24,9 +24,9 @@ jobs:
           npx antora local-antora-playbook.yml --fetch
 
       - name: Install git and rsync 📚
-         run: |
-           apk update && apk add git rsync
-           
+        run: |
+          apk update && apk add git rsync
+
       - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@v4.2.5
          if: contains(github.ref,'refs/heads/main') 
