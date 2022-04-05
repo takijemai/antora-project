@@ -13,14 +13,29 @@ jobs:
     runs-on: ubuntu-latest
     container: node:16-alpine
     steps:
+      - uses: actions/checkout@v2
+
       - name: Install git and rsync
         run: |
           apk update && apk add git rsync
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Antora project
+        run: |
+          cp -R node_modules/@antora/lunr-extension/supplemental_ui/* supplemental-ui/ 
+          npx antora local-antora-playbook.yml --fetch
+
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/main')
         with:
           branch: gh-pages
-          folder: cicd-232cf038086dc798e51d5201bba9945277562851
+          folder: docs
           clean: true
+      # Uploads the generated site
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cicd-232cf038086dc798e51d5201bba9945277562851
+          path: docs/
