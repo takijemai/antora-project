@@ -15,6 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install git and rsync
+        run: |
+          apk update && apk add git rsync
+
       - name: Install dependencies
         run: npm install
 
@@ -23,11 +27,7 @@ jobs:
           cp -R node_modules/@antora/lunr-extension/supplemental_ui/* supplemental-ui/ 
           npx antora local-antora-playbook.yml --fetch
 
-      - name: Install git and rsync 📚
-        run: |
-          apk update && apk add git rsync
-
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/main')
         with:
