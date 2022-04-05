@@ -32,7 +32,7 @@ jobs:
         if: contains(github.ref,'refs/heads/main')
         with:
           branch: gh-pages
-          folder: docs
+          folder: cicd-232cf038086dc798e51d5201bba9945277562851
           clean: true
       # Uploads the generated site
       - uses: actions/upload-artifact@v3
