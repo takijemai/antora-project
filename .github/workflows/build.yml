@@ -17,7 +17,7 @@ jobs:
         run: |
           apk update && apk add git rsync
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Install dependencies
         run: npm install
@@ -34,7 +34,7 @@ jobs:
           path: docs/
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/main')
         with:
           branch: gh-pages
