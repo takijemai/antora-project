@@ -22,6 +22,18 @@ jobs:
         run: |
           cp -R node_modules/@antora/lunr-extension/supplemental_ui/* supplemental-ui/ 
           npx antora local-antora-playbook.yml --fetch
+
+      - name: Install git and rsync 📚
+         run: |
+           apk update && apk add git rsync
+           
+      - name: Deploy 🚀
+         uses: JamesIves/github-pages-deploy-action@v4.2.5
+         if: contains(github.ref,'refs/heads/main') 
+         with:
+           branch: gh-pages 
+           folder: docs 
+           clean: true 
       # Uploads the generated site
       - uses: actions/upload-artifact@v3
         with:
