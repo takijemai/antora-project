@@ -27,6 +27,12 @@ jobs:
           cp -R node_modules/@antora/lunr-extension/supplemental_ui/* supplemental-ui/ 
           npx antora local-antora-playbook.yml --fetch
 
+      # Uploads the generated site
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cicd-232cf038086dc798e51d5201bba9945277562851
+          path: docs/
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/main')
@@ -34,8 +40,3 @@ jobs:
           branch: gh-pages
           folder: docs
           clean: true
-      # Uploads the generated site
-      - uses: actions/upload-artifact@v3
-        with:
-          name: cicd-232cf038086dc798e51d5201bba9945277562851
-          path: docs/
