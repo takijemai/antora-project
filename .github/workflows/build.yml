@@ -25,5 +25,5 @@ jobs:
       # Uploads the generated site
       - uses: actions/upload-artifact@v3
         with:
-          name: docs
-          path: cicd-232cf038086dc798e51d5201bba9945277562851
+          name: cicd-232cf038086dc798e51d5201bba9945277562851
+          path: docs/
